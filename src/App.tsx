@@ -10,6 +10,10 @@ import EndToEndPlanning from "./pages/Features/EndToEndPlanning";
 import VendorMatching from "./pages/Features/VendorMatching";
 import BudgetManager from "./pages/Features/BudgetManager";
 import PackageSuggestions from "./pages/Features/PackageSuggestions";
+import TaskChecklist from "./pages/Features/TaskChecklist";
+import DigitalInvitation from "./pages/Features/DigitalInvitation";
+import SmartNotifications from "./pages/Features/SmartNotifications";
+import InvitationCard from "./pages/Features/InvitationCard";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +33,10 @@ const App = () => (
           <Route path="/features/vendors" element={<VendorMatching />} />
           <Route path="/features/budget" element={<BudgetManager />} />
           <Route path="/features/packages" element={<PackageSuggestions />} />
+          <Route path="/features/tasks" element={<TaskChecklist />} />
+          <Route path="/features/invitations" element={<DigitalInvitation />} />
+          <Route path="/features/notifications" element={<SmartNotifications />} />
+          <Route path="/features/cards" element={<InvitationCard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

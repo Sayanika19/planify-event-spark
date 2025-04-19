@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Package, FileText, MapPin } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import BackButton from "@/components/ui/back-button";
 
 const EndToEndPlanning = () => {
@@ -24,7 +25,17 @@ const EndToEndPlanning = () => {
             <div className="space-y-4">
               <div>
                 <Label htmlFor="cuisine">Cuisine Type</Label>
-                <Input id="cuisine" placeholder="e.g., Italian, Indian, etc." />
+                <Select>
+                  <SelectTrigger id="cuisine">
+                    <SelectValue placeholder="Select cuisine type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="north-indian">North Indian</SelectItem>
+                    <SelectItem value="south-indian">South Indian</SelectItem>
+                    <SelectItem value="chinese">Chinese</SelectItem>
+                    <SelectItem value="continental">Continental</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <Label htmlFor="guests">Number of Guests</Label>
@@ -46,7 +57,31 @@ const EndToEndPlanning = () => {
             <div className="space-y-4">
               <div>
                 <Label htmlFor="theme">Theme</Label>
-                <Input id="theme" placeholder="e.g., Modern, Traditional, etc." />
+                <Select>
+                  <SelectTrigger id="theme">
+                    <SelectValue placeholder="Select theme" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="modern">Modern</SelectItem>
+                    <SelectItem value="traditional">Traditional</SelectItem>
+                    <SelectItem value="rustic">Rustic</SelectItem>
+                    <SelectItem value="minimalist">Minimalist</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="themeStyle">Theme Style</Label>
+                <Select>
+                  <SelectTrigger id="themeStyle">
+                    <SelectValue placeholder="Select theme style" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="royal">Royal</SelectItem>
+                    <SelectItem value="bohemian">Bohemian</SelectItem>
+                    <SelectItem value="contemporary">Contemporary</SelectItem>
+                    <SelectItem value="vintage">Vintage</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <Label htmlFor="color">Color Scheme</Label>
@@ -68,11 +103,31 @@ const EndToEndPlanning = () => {
             <div className="space-y-4">
               <div>
                 <Label htmlFor="location">Location</Label>
-                <Input id="location" placeholder="Enter preferred area" />
+                <Select>
+                  <SelectTrigger id="location">
+                    <SelectValue placeholder="Select location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="delhi">Delhi NCR</SelectItem>
+                    <SelectItem value="mumbai">Mumbai</SelectItem>
+                    <SelectItem value="bangalore">Bangalore</SelectItem>
+                    <SelectItem value="hyderabad">Hyderabad</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <Label htmlFor="capacity">Venue Capacity</Label>
-                <Input id="capacity" type="number" placeholder="Required capacity" />
+                <Select>
+                  <SelectTrigger id="capacity">
+                    <SelectValue placeholder="Select capacity range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="50-100">50-100 guests</SelectItem>
+                    <SelectItem value="100-200">100-200 guests</SelectItem>
+                    <SelectItem value="200-500">200-500 guests</SelectItem>
+                    <SelectItem value="500+">500+ guests</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <Button className="w-full">Search Venues</Button>
             </div>
