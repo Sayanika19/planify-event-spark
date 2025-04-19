@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Calendar, 
@@ -14,42 +15,50 @@ const features = [
   {
     icon: <CheckCircle className="h-10 w-10 text-planify-500" />,
     title: "End-to-End Event Planning",
-    description: "One-stop solution for managing food, decor, venues, and services all in one place."
+    description: "One-stop solution for managing food, decor, venues, and services all in one place.",
+    link: "/features/planning"
   },
   {
     icon: <Users className="h-10 w-10 text-planify-500" />,
     title: "AI-Powered Vendor Matching",
-    description: "Smart recommendations based on your budget, location, and preferences."
+    description: "Smart recommendations based on your budget, location, and preferences.",
+    link: "/features/vendors"
   },
   {
     icon: <DollarSign className="h-10 w-10 text-planify-500" />,
     title: "Budget Management",
-    description: "Real-time budget tracking and smart suggestions to stay within limits."
+    description: "Real-time budget tracking and smart suggestions to stay within limits.",
+    link: "/features/budget"
   },
   {
     icon: <Calendar className="h-10 w-10 text-planify-500" />,
     title: "Task Checklist Generator",
-    description: "Automatically generated to-do list based on selected event type."
+    description: "Automatically generated to-do list based on selected event type.",
+    link: "/features/tasks"
   },
   {
     icon: <Share className="h-10 w-10 text-planify-500" />,
     title: "Digital Invitation Sharing",
-    description: "Share beautiful, customizable cards via WhatsApp, email, or QR code."
+    description: "Share beautiful, customizable cards via WhatsApp, email, or QR code.",
+    link: "/features/invitations"
   },
   {
     icon: <Bell className="h-10 w-10 text-planify-500" />,
     title: "Smart Notifications",
-    description: "Alerts for deadlines, payments, vendor responses, and event day reminders."
+    description: "Alerts for deadlines, payments, vendor responses, and event day reminders.",
+    link: "/features/notifications"
   },
   {
     icon: <Mail className="h-10 w-10 text-planify-500" />,
     title: "Invitation Card Ordering",
-    description: "Browse & purchase customized physical cards with digital versions."
+    description: "Browse & purchase customized physical cards with digital versions.",
+    link: "/features/cards"
   },
   {
     icon: <Users className="h-10 w-10 text-planify-500" />,
-    title: "Collaborative Planning",
-    description: "Multiple users (friends/family) can co-plan and make decisions together."
+    title: "Package Suggestions",
+    description: "Get personalized vendor package combinations based on your budget.",
+    link: "/features/packages"
   }
 ];
 
@@ -68,17 +77,19 @@ const FeaturesSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-full">
-              <CardHeader className="pb-2">
-                <div className="mb-2">{feature.icon}</div>
-                <CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <Link to={feature.link} key={index}>
+              <Card className="border border-gray-200 hover:shadow-lg transition-shadow duration-300 h-full">
+                <CardHeader className="pb-2">
+                  <div className="mb-2">{feature.icon}</div>
+                  <CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-gray-600">
+                    {feature.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>
