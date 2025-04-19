@@ -1,13 +1,14 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Users, DollarSign, MapPin } from "lucide-react";
+import { Users, IndianRupee, MapPin } from "lucide-react";
+import BackButton from "@/components/ui/back-button";
 
 const VendorMatching = () => {
   return (
     <div className="container mx-auto p-6">
+      <BackButton />
       <h1 className="text-3xl font-bold mb-8">AI-Powered Vendor Matching</h1>
       
       <Card className="max-w-2xl mx-auto">
@@ -17,10 +18,10 @@ const VendorMatching = () => {
         <CardContent>
           <div className="space-y-6">
             <div className="flex items-center gap-4">
-              <DollarSign className="h-5 w-5 text-planify-500" />
+              <IndianRupee className="h-5 w-5 text-planify-500" />
               <div className="flex-1">
                 <Label htmlFor="budget">Budget Range</Label>
-                <Input id="budget" type="number" placeholder="Enter your budget" />
+                <Input id="budget" type="number" placeholder="Enter your budget in INR" />
               </div>
             </div>
             

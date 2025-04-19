@@ -4,10 +4,12 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Package, FileText, MapPin } from "lucide-react";
+import BackButton from "@/components/ui/back-button";
 
 const EndToEndPlanning = () => {
   return (
     <div className="container mx-auto p-6">
+      <BackButton />
       <h1 className="text-3xl font-bold mb-8">End-to-End Event Planning</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,10 +1,10 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Package } from "lucide-react";
+import BackButton from "@/components/ui/back-button";
 
 interface PackageOption {
   title: string;
@@ -48,6 +48,7 @@ const PackageSuggestions = () => {
 
   return (
     <div className="container mx-auto p-6">
+      <BackButton />
       <h1 className="text-3xl font-bold mb-8">Package Suggestions</h1>
       
       <Card className="max-w-2xl mx-auto mb-8">
@@ -60,11 +61,11 @@ const PackageSuggestions = () => {
             <div className="flex items-center gap-4">
               <Package className="h-5 w-5 text-planify-500" />
               <div className="flex-1">
-                <Label htmlFor="budget">Total Budget</Label>
+                <Label htmlFor="budget">Total Budget (₹)</Label>
                 <Input 
                   id="budget" 
                   type="number" 
-                  placeholder="Enter your budget"
+                  placeholder="Enter your budget in INR"
                   value={budget || ''}
                   onChange={(e) => setBudget(Number(e.target.value))}
                 />
@@ -88,7 +89,7 @@ const PackageSuggestions = () => {
               <CardHeader>
                 <CardTitle className="text-xl">{pkg.title}</CardTitle>
                 <CardDescription className="text-lg font-semibold text-planify-500">
-                  ${pkg.totalCost.toLocaleString()}
+                  ₹{pkg.totalCost.toLocaleString('en-IN')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
