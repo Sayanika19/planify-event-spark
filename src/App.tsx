@@ -16,6 +16,7 @@ import InvitationCard from "./pages/Features/InvitationCard";
 import PhotographyServices from "./pages/Features/PhotographyServices";
 import DjServices from "./pages/Features/DjServices";
 import ArtistServices from "./pages/Features/ArtistServices";
+import Cart from "./pages/Cart";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/pricing" element={<Index />} />
           <Route path="/about" element={<Index />} />
           <Route path="/contact" element={<Index />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/features/planning" element={<EndToEndPlanning />} />
           <Route path="/features/vendors" element={<VendorMatching />} />
           <Route path="/features/budget" element={<BudgetManager />} />

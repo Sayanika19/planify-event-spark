@@ -1,8 +1,15 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
 
 const HeroSection = () => {
+  const scrollToFeatures = () => {
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative bg-white overflow-hidden">
       <div className="absolute inset-0 bg-hero-pattern bg-no-repeat bg-cover opacity-50"></div>
@@ -16,11 +23,18 @@ const HeroSection = () => {
               Planify simplifies event planning with vendor matching, budget management, and seamless collaboration—all in one platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button className="bg-planify-500 hover:bg-planify-600 text-white px-8 py-6 text-lg h-auto">
+              <Button 
+                className="bg-planify-500 hover:bg-planify-600 text-white px-8 py-6 text-lg h-auto"
+                onClick={scrollToFeatures}
+              >
                 Get Started
               </Button>
               <Link to="/cart">
-                <Button variant="outline" className="border-planify-400 text-planify-600 hover:bg-planify-50 px-8 py-6 text-lg h-auto">
+                <Button 
+                  variant="outline" 
+                  className="border-planify-400 text-planify-600 hover:bg-planify-50 px-8 py-6 text-lg h-auto flex items-center gap-2"
+                >
+                  <ShoppingCart className="h-5 w-5" />
                   View Cart
                 </Button>
               </Link>
