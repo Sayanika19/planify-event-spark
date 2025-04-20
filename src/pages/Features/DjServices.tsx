@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Music } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const djPackages = {
   "wedding": [
@@ -28,11 +29,14 @@ const DjServices = () => {
   const [eventType, setEventType] = useState("");
   const [selectedPackage, setSelectedPackage] = useState<null | any>(null);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleAddToCart = () => {
     if (selectedPackage) {
-      // Add to cart logic here
-      console.log("Added to cart:", selectedPackage);
+      toast({
+        title: "Added to cart",
+        description: `${selectedPackage.name} package has been added to your cart.`,
+      });
       navigate("/cart");
     }
   };
