@@ -6,8 +6,42 @@ import { Button } from "@/components/ui/button";
 import { Package, FileText, MapPin } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import BackButton from "@/components/ui/back-button";
+import { useState } from "react";
+
+const mockVenues = {
+  "delhi": [
+    { id: 1, name: "Royal Palace", capacity: "200-500", price: "₹200,000", address: "Dwarka, Delhi" },
+    { id: 2, name: "Garden View", capacity: "100-200", price: "₹150,000", address: "Rohini, Delhi" }
+  ],
+  "mumbai": [
+    { id: 3, name: "Sea View Hall", capacity: "500+", price: "₹300,000", address: "Bandra, Mumbai" },
+    { id: 4, name: "Grand Ballroom", capacity: "200-500", price: "₹250,000", address: "Andheri, Mumbai" }
+  ]
+};
+
+const mockThemeStyles = {
+  "wedding": ["Royal", "Traditional", "Modern", "Contemporary"],
+  "birthday": ["Fun", "Casual", "Themed", "Elegant"],
+  "corporate": ["Professional", "Modern", "Minimal", "Tech"],
+  "funeral": ["Respectful", "Traditional", "Simple", "Cultural"]
+};
 
 const EndToEndPlanning = () => {
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedOccasion, setSelectedOccasion] = useState("");
+  const [venues, setVenues] = useState<any[]>([]);
+  const [themeStyles, setThemeStyles] = useState<string[]>([]);
+
+  const handleLocationChange = (value: string) => {
+    setSelectedLocation(value);
+    setVenues(mockVenues[value as keyof typeof mockVenues] || []);
+  };
+
+  const handleOccasionChange = (value: string) => {
+    setSelectedOccasion(value);
+    setThemeStyles(mockThemeStyles[value as keyof typeof mockThemeStyles] || []);
+  };
+
   return (
     <div className="container mx-auto p-6">
       <BackButton />
@@ -30,10 +64,10 @@ const EndToEndPlanning = () => {
                     <SelectValue placeholder="Select cuisine type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="north-indian">North Indian</SelectItem>
-                    <SelectItem value="south-indian">South Indian</SelectItem>
-                    <SelectItem value="chinese">Chinese</SelectItem>
-                    <SelectItem value="continental">Continental</SelectItem>
+                    <SelectItem value="north-indian">North Indian (₹800/plate)</SelectItem>
+                    <SelectItem value="south-indian">South Indian (₹600/plate)</SelectItem>
+                    <SelectItem value="chinese">Chinese (₹700/plate)</SelectItem>
+                    <SelectItem value="continental">Continental (₹900/plate)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -56,16 +90,16 @@ const EndToEndPlanning = () => {
           <CardContent>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="theme">Theme</Label>
-                <Select>
-                  <SelectTrigger id="theme">
-                    <SelectValue placeholder="Select theme" />
+                <Label htmlFor="occasion">Occasion Type</Label>
+                <Select onValueChange={handleOccasionChange}>
+                  <SelectTrigger id="occasion">
+                    <SelectValue placeholder="Select occasion" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="modern">Modern</SelectItem>
-                    <SelectItem value="traditional">Traditional</SelectItem>
-                    <SelectItem value="rustic">Rustic</SelectItem>
-                    <SelectItem value="minimalist">Minimalist</SelectItem>
+                    <SelectItem value="wedding">Wedding</SelectItem>
+                    <SelectItem value="birthday">Birthday</SelectItem>
+                    <SelectItem value="corporate">Corporate Event</SelectItem>
+                    <SelectItem value="funeral">Funeral</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -76,10 +110,11 @@ const EndToEndPlanning = () => {
                     <SelectValue placeholder="Select theme style" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="royal">Royal</SelectItem>
-                    <SelectItem value="bohemian">Bohemian</SelectItem>
-                    <SelectItem value="contemporary">Contemporary</SelectItem>
-                    <SelectItem value="vintage">Vintage</SelectItem>
+                    {themeStyles.map((style) => (
+                      <SelectItem key={style} value={style.toLowerCase()}>
+                        {style}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
@@ -103,7 +138,7 @@ const EndToEndPlanning = () => {
             <div className="space-y-4">
               <div>
                 <Label htmlFor="location">Location</Label>
-                <Select>
+                <Select onValueChange={handleLocationChange}>
                   <SelectTrigger id="location">
                     <SelectValue placeholder="Select location" />
                   </SelectTrigger>
@@ -115,21 +150,22 @@ const EndToEndPlanning = () => {
                   </SelectContent>
                 </Select>
               </div>
-              <div>
-                <Label htmlFor="capacity">Venue Capacity</Label>
-                <Select>
-                  <SelectTrigger id="capacity">
-                    <SelectValue placeholder="Select capacity range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="50-100">50-100 guests</SelectItem>
-                    <SelectItem value="100-200">100-200 guests</SelectItem>
-                    <SelectItem value="200-500">200-500 guests</SelectItem>
-                    <SelectItem value="500+">500+ guests</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button className="w-full">Search Venues</Button>
+
+              {venues.length > 0 && (
+                <div className="space-y-4">
+                  <Label>Available Venues</Label>
+                  {venues.map((venue) => (
+                    <Card key={venue.id} className="p-4">
+                      <h3 className="font-semibold">{venue.name}</h3>
+                      <p className="text-sm text-muted-foreground">Capacity: {venue.capacity}</p>
+                      <p className="text-sm text-muted-foreground">Price: {venue.price}</p>
+                      <p className="text-sm text-muted-foreground">Address: {venue.address}</p>
+                    </Card>
+                  ))}
+                </div>
+              )}
+
+              <Button className="w-full">Book Venue</Button>
             </div>
           </CardContent>
         </Card>

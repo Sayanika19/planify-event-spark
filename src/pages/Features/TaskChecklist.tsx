@@ -1,9 +1,48 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import BackButton from "@/components/ui/back-button";
-import { Calendar } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useState } from "react";
+import { CakeSlice } from "lucide-react";
+
+const mockTasks = {
+  "wedding": [
+    "Book venue",
+    "Arrange catering",
+    "Order wedding cake",
+    "Send invitations",
+    "Book photographer",
+    "Arrange transportation"
+  ],
+  "birthday": [
+    "Choose theme",
+    "Order cake",
+    "Send invitations",
+    "Plan activities",
+    "Arrange decorations",
+    "Order food"
+  ],
+  "corporate": [
+    "Book conference room",
+    "Arrange catering",
+    "Send email invites",
+    "Prepare agenda",
+    "Set up AV equipment",
+    "Order supplies"
+  ]
+};
 
 const TaskChecklist = () => {
+  const [selectedEvent, setSelectedEvent] = useState("");
+  const [tasks, setTasks] = useState<string[]>([]);
+
+  const handleEventChange = (value: string) => {
+    setSelectedEvent(value);
+    setTasks(mockTasks[value as keyof typeof mockTasks] || []);
+  };
+
   return (
     <div className="container mx-auto p-6">
       <BackButton />
@@ -11,12 +50,37 @@ const TaskChecklist = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5" />
+            <CakeSlice className="h-5 w-5" />
             Event Tasks
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">Coming soon - Task Checklist Generator</p>
+          <div className="space-y-6">
+            <div>
+              <Label htmlFor="eventType">Event Type</Label>
+              <Select onValueChange={handleEventChange}>
+                <SelectTrigger id="eventType">
+                  <SelectValue placeholder="Select event type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="wedding">Wedding</SelectItem>
+                  <SelectItem value="birthday">Birthday</SelectItem>
+                  <SelectItem value="corporate">Corporate Event</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {tasks.length > 0 && (
+              <div className="space-y-4">
+                {tasks.map((task, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <Checkbox id={`task-${index}`} />
+                    <Label htmlFor={`task-${index}`}>{task}</Label>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </CardContent>
       </Card>
     </div>
