@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -8,7 +7,10 @@ import {
   Bell, 
   DollarSign, 
   Mail,
-  CheckCircle
+  CheckCircle,
+  Camera,
+  Music,
+  User
 } from "lucide-react";
 
 const features = [
@@ -17,6 +19,24 @@ const features = [
     title: "End-to-End Event Planning",
     description: "One-stop solution for managing food, decor, venues, and services all in one place.",
     link: "/features/planning"
+  },
+  {
+    icon: <Camera className="h-10 w-10 text-planify-500" />,
+    title: "Photography Services",
+    description: "Professional photographers and videographers for your events.",
+    link: "/features/photography"
+  },
+  {
+    icon: <Music className="h-10 w-10 text-planify-500" />,
+    title: "DJ & Entertainment",
+    description: "Book DJs and music services for your celebration.",
+    link: "/features/entertainment"
+  },
+  {
+    icon: <User className="h-10 w-10 text-planify-500" />,
+    title: "Artist Services",
+    description: "Makeup artists, mehendi artists, and hair stylists.",
+    link: "/features/artists"
   },
   {
     icon: <Users className="h-10 w-10 text-planify-500" />,

@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import BackButton from "@/components/ui/back-button";
 import { Label } from "@/components/ui/label";
@@ -6,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
-import { Mail, Gift } from "lucide-react";
+import { Mail, Gift, Upload } from "lucide-react";
 
 const mockTemplates = [
   {
@@ -31,6 +30,7 @@ const mockTemplates = [
 
 const InvitationCard = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<number | null>(null);
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     eventName: "",
     date: "",
@@ -40,6 +40,17 @@ const InvitationCard = () => {
 
   const handleTemplateSelect = (id: number) => {
     setSelectedTemplate(id);
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setBackgroundImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -71,6 +82,27 @@ const InvitationCard = () => {
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="background">Upload Background Image</Label>
+                <div className="flex items-center gap-2">
+                  <Input
+                    id="background"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
+                  <Button
+                    variant="outline"
+                    onClick={() => document.getElementById('background')?.click()}
+                    className="w-full"
+                  >
+                    <Upload className="mr-2 h-4 w-4" />
+                    Choose Image
+                  </Button>
+                </div>
               </div>
 
               <div>
@@ -124,7 +156,15 @@ const InvitationCard = () => {
           </CardHeader>
           <CardContent>
             {selectedTemplate ? (
-              <div className="border p-6 rounded-lg space-y-4">
+              <div 
+                className="border p-6 rounded-lg space-y-4"
+                style={{
+                  backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  minHeight: '400px'
+                }}
+              >
                 <h3 className="text-xl font-semibold text-center">{formData.eventName || "Event Name"}</h3>
                 <p className="text-center">Date: {formData.date || "TBD"}</p>
                 <p className="text-center">Venue: {formData.venue || "TBD"}</p>

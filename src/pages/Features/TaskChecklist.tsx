@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import BackButton from "@/components/ui/back-button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -37,10 +36,24 @@ const mockTasks = {
 const TaskChecklist = () => {
   const [selectedEvent, setSelectedEvent] = useState("");
   const [tasks, setTasks] = useState<string[]>([]);
+  const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
 
   const handleEventChange = (value: string) => {
     setSelectedEvent(value);
     setTasks(mockTasks[value as keyof typeof mockTasks] || []);
+    setSelectedTasks([]);
+  };
+
+  const handleTaskToggle = (task: string) => {
+    setSelectedTasks(prev => 
+      prev.includes(task) 
+        ? prev.filter(t => t !== task)
+        : [...prev, task]
+    );
+  };
+
+  const handleConfirm = () => {
+    console.log("Selected tasks:", selectedTasks);
   };
 
   return (
@@ -74,10 +87,21 @@ const TaskChecklist = () => {
               <div className="space-y-4">
                 {tasks.map((task, index) => (
                   <div key={index} className="flex items-center space-x-2">
-                    <Checkbox id={`task-${index}`} />
+                    <Checkbox 
+                      id={`task-${index}`}
+                      checked={selectedTasks.includes(task)}
+                      onCheckedChange={() => handleTaskToggle(task)}
+                    />
                     <Label htmlFor={`task-${index}`}>{task}</Label>
                   </div>
                 ))}
+                <Button 
+                  className="w-full mt-4"
+                  onClick={handleConfirm}
+                  disabled={selectedTasks.length === 0}
+                >
+                  Confirm Selected Tasks
+                </Button>
               </div>
             )}
           </div>
