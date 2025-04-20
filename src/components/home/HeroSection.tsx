@@ -19,9 +19,11 @@ const HeroSection = () => {
               <Button className="bg-planify-500 hover:bg-planify-600 text-white px-8 py-6 text-lg h-auto">
                 Get Started
               </Button>
-              <Button variant="outline" className="border-planify-400 text-planify-600 hover:bg-planify-50 px-8 py-6 text-lg h-auto">
-                Book a Demo
-              </Button>
+              <Link to="/cart">
+                <Button variant="outline" className="border-planify-400 text-planify-600 hover:bg-planify-50 px-8 py-6 text-lg h-auto">
+                  View Cart
+                </Button>
+              </Link>
             </div>
             <div className="pt-4 text-gray-500">
               <p className="text-sm">Trusted by 10,000+ event planners worldwide</p>

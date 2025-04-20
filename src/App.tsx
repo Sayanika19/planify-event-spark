@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,9 @@ import TaskChecklist from "./pages/Features/TaskChecklist";
 import DigitalInvitation from "./pages/Features/DigitalInvitation";
 import SmartNotifications from "./pages/Features/SmartNotifications";
 import InvitationCard from "./pages/Features/InvitationCard";
+import PhotographyServices from "./pages/Features/PhotographyServices";
+import DjServices from "./pages/Features/DjServices";
+import ArtistServices from "./pages/Features/ArtistServices";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +39,9 @@ const App = () => (
           <Route path="/features/invitations" element={<DigitalInvitation />} />
           <Route path="/features/notifications" element={<SmartNotifications />} />
           <Route path="/features/cards" element={<InvitationCard />} />
+          <Route path="/features/photography" element={<PhotographyServices />} />
+          <Route path="/features/dj" element={<DjServices />} />
+          <Route path="/features/artists" element={<ArtistServices />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
